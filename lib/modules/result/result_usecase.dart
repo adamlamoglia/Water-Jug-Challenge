@@ -2,19 +2,20 @@ import 'dart:math';
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
+import 'package:water_jug_challenge/modules/result/result_bloc.dart';
 
 ResultUseCase get resultUseCase => Get.find();
 
 class ResultUseCase extends DisposableInterface {
-  String measureWater(int jugX, int jugY, int targetAmount) {
-    String resultMessage = '';
+
+  void measureWater() {
+    int jugX = resultBloc.jugX.value;
+    int jugY = resultBloc.jugY.value;
+    int targetAmount = resultBloc.jugZ.value;
 
     if (_canMeasureWater(jugX, jugY, targetAmount)) {
-      resultMessage = 'Solution: ${minSteps(jugX, jugY, targetAmount)} steps';
-    } else {
-      resultMessage = 'No Solution';
-    }
-    return resultMessage;
+      minSteps(jugX, jugY, targetAmount);
+    } 
   }
 
   bool _canMeasureWater(int x, int y, int z) {
@@ -46,8 +47,8 @@ class ResultUseCase extends DisposableInterface {
     } else {
       ResultModel.addStepStartingFromY(StepModel(
         action: action,
-        actualX: from,
-        actualY: to,
+        actualX: to,
+        actualY: from,
       ));
     }
   }
@@ -98,13 +99,13 @@ class ResultUseCase extends DisposableInterface {
 
 // Returns count of minimum steps needed to
 // measure d liter
-  int minSteps(int x, int y, int z) {
+  void minSteps(int x, int y, int z) {
     // To make sure that m is smaller than n
-    if (x > y) {
-      int tempM = x;
-      x = y;
-      y = tempM;
-    }
+    // if (x > y) {
+    //   int tempM = x;
+    //   x = y;
+    //   y = tempM;
+    // }
 
     // If gcd of n and m does not divide d
     // then solution is not possible
@@ -116,8 +117,8 @@ class ResultUseCase extends DisposableInterface {
     //    m liter jug
     // b) Water of m liter jug is poured into
     //    n liter jug
-    return min(
-        pour(y, x, z, true), // n to m
-        pour(x, y, z, false)); // m to n
+    min(
+        pour(y, x, z, false), // y to x
+        pour(x, y, z, true)); // x to y
   }
 }

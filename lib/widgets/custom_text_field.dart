@@ -11,10 +11,13 @@ class CustomTextField extends StatelessWidget {
   final Function(String) onChanged;
 
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return TextField(
       keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: labelText),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: Theme.of(context).textTheme.bodyMedium,
+      ),
       onChanged: onChanged,
     );
   }

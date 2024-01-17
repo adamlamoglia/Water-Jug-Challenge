@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:water_jug_challenge/app/app_module.dart';
 import 'package:water_jug_challenge/app/app_routes.dart';
@@ -41,12 +42,14 @@ class AppWidget extends StatelessWidget {
         highlightColor: Colors.transparent,
         hoverColor: Colors.transparent,
         scaffoldBackgroundColor: const Color(0xFFE7E0EE),
-        textTheme: const TextTheme(
-          bodyLarge: TextStyle(
-            color: Color.fromARGB(255, 49, 43, 131),
+        textTheme: TextTheme(
+          bodyLarge: GoogleFonts.lilitaOne(
+            color: const Color.fromARGB(255, 0, 0, 0),
+            fontSize: 24,
           ),
-          bodyMedium: TextStyle(
-            color: Color.fromARGB(255, 72, 32, 99),
+          bodyMedium: GoogleFonts.lilitaOne(
+            color: Color.fromARGB(255, 63, 62, 62),
+            fontSize: 18,
           ),
         ),
         dividerColor: const Color(0xFFDBC1E4),
