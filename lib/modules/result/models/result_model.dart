@@ -7,6 +7,15 @@ class ResultModel {
   static List<StepModel>? stepsStartingFromX = [];
   static List<StepModel>? stepsStartingFromY = [];
 
+  static const String fillBucketX = 'Fill bucket X';
+  static const String fillBucketY = 'Fill bucket Y';
+  static const String emptyBucketX = 'Empty bucket X';
+  static const String emptyBucketY = 'Empty bucket Y';
+  static const String transferFromBucketXtoBucketY =
+      'Transfer from bucket X to bucket Y';
+  static const String transferFromBucketYtoBucketX =
+      'Transfer from bucket Y to bucket X';
+
   static void addStepStartingFromX(StepModel step) {
     stepsStartingFromX!.add(step);
   }

@@ -7,7 +7,6 @@ import 'package:water_jug_challenge/modules/result/result_bloc.dart';
 ResultUseCase get resultUseCase => Get.find();
 
 class ResultUseCase extends DisposableInterface {
-
   void measureWater() {
     int jugX = resultBloc.jugX.value;
     int jugY = resultBloc.jugY.value;
@@ -15,7 +14,7 @@ class ResultUseCase extends DisposableInterface {
 
     if (_canMeasureWater(jugX, jugY, targetAmount)) {
       minSteps(jugX, jugY, targetAmount);
-    } 
+    }
   }
 
   bool _canMeasureWater(int x, int y, int z) {
@@ -37,16 +36,30 @@ class ResultUseCase extends DisposableInterface {
     return a;
   }
 
-  void addToStepModel(int from, int to, StepAction action, bool isXtoY) {
+  void addToStepModel(int from, int to, StepActionBasic action, bool isXtoY) {
+    StepAction? stepAction;
+
+    switch (action) {
+      case StepActionBasic.fill:
+        stepAction = isXtoY ? StepAction.fillX : StepAction.fillY;
+        break;
+      case StepActionBasic.empty:
+        stepAction = isXtoY ? StepAction.emptyX : StepAction.emptyY;
+        break;
+      case StepActionBasic.transfer:
+        stepAction = isXtoY ? StepAction.transferXtoY : StepAction.transferYtoX;
+        break;
+    }
+
     if (isXtoY) {
       ResultModel.addStepStartingFromX(StepModel(
-        action: action,
+        action: stepAction,
         actualX: from,
         actualY: to,
       ));
     } else {
       ResultModel.addStepStartingFromY(StepModel(
-        action: action,
+        action: stepAction,
         actualX: to,
         actualY: from,
       ));
@@ -61,7 +74,7 @@ class ResultUseCase extends DisposableInterface {
 
     // Initialize count of steps required
     int step = 1; // Needed to fill "from" gallon
-    addToStepModel(from, to, StepAction.fill, isXtoY);
+    addToStepModel(from, to, StepActionBasic.fill, isXtoY);
 
     // Break the loop when either of the two
     // gallons has z litre water
@@ -76,7 +89,7 @@ class ResultUseCase extends DisposableInterface {
 
       // Increment count of steps
       step++;
-      addToStepModel(from, to, StepAction.transfer, isXtoY);
+      addToStepModel(from, to, StepActionBasic.transfer, isXtoY);
 
       if (from == z || to == z) break;
 
@@ -84,14 +97,14 @@ class ResultUseCase extends DisposableInterface {
       if (from == 0) {
         from = fromGallon;
         step++;
-        addToStepModel(from, to, StepAction.fill, isXtoY);
+        addToStepModel(from, to, StepActionBasic.fill, isXtoY);
       }
 
       // If second jug becomes full, empty it
       if (to == toGallon) {
         to = 0;
         step++;
-        addToStepModel(from, to, StepAction.empty, isXtoY);
+        addToStepModel(from, to, StepActionBasic.empty, isXtoY);
       }
     }
     return step;

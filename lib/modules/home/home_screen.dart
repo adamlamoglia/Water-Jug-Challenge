@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                 resultBloc.jugZ.value = int.tryParse(value) ?? 0;
               },
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 80),
             Obx(() {
               bool canClickButton = resultBloc.jugX.value > 0 &&
                   resultBloc.jugY.value > 0 &&
@@ -59,8 +59,9 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Calculate',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               );
             }),

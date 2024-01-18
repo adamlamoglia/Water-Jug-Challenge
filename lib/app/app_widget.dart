@@ -48,7 +48,7 @@ class AppWidget extends StatelessWidget {
             fontSize: 24,
           ),
           bodyMedium: GoogleFonts.lilitaOne(
-            color: Color.fromARGB(255, 63, 62, 62),
+            color: const Color.fromARGB(255, 63, 62, 62),
             fontSize: 18,
           ),
         ),

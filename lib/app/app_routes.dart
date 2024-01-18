@@ -15,7 +15,7 @@ class AppRoutes {
     ),
     GetPage(
       name: result,
-      page: () => const ResultScreen(),
+      page: () => ResultScreen(),
       transition: Transition.fadeIn,
       arguments: const [],
     ),

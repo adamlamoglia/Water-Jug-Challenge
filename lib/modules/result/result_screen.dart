@@ -1,9 +1,13 @@
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
+import 'package:water_jug_challenge/widgets/step/step_widget.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  ResultScreen({super.key});
+
+  final controller = PageController(viewportFraction: 1, keepPage: false);
 
   @override
   Widget build(BuildContext context) {
@@ -23,30 +27,45 @@ class ResultScreen extends StatelessWidget {
           SizedBox(width: 10),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: bestSolution.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No Solution',
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: bestSolution.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          bestSolution[index].action.toString(),
-                        ),
-                        subtitle: Text(
-                          'Actual X: ${bestSolution[index].actualX} - Actual Y: ${bestSolution[index].actualY} - Action: ${bestSolution[index].action}',
-                        ),
-                      );
-                    },
-                  ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 600,
+                child: PageView.builder(
+                  controller: controller,
+                  itemCount: bestSolution.length,
+                  itemBuilder: (_, index) {
+                    return StepWidget(step: bestSolution[index], index: index);
+                  },
+                ),
+              ),
+              const SizedBox(height: 16),
+              SmoothPageIndicator(
+                controller: controller,
+                count: bestSolution.length,
+                onDotClicked: (index) => controller.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                ),
+                effect: const SlideEffect(
+                  spacing: 8.0,
+                  radius: 4.0,
+                  dotWidth: 24.0,
+                  dotHeight: 16.0,
+                  paintStyle: PaintingStyle.stroke,
+                  strokeWidth: 1.5,
+                  dotColor: Colors.grey,
+                  activeDotColor: Colors.indigo,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
