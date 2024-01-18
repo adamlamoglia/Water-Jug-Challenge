@@ -128,8 +128,10 @@ cd Water-Jug-Challenge
 
 ```bash
  flutter run
+```
 
 4. If you prefer, you can build and run a project (Android)
 
 ```bash
  flutter build apk
+```
