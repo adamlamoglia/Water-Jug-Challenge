@@ -26,6 +26,7 @@ This sections lists several test cases that you can use to validate the correctn
     - Amount wanted Z: 4
     - Result: 4 steps
     
+    
     | Step | Jug X | Jug Y | Action                   |
     |------|-------|-------|--------------------------|
     | 1    | 2     | 0     | Fill Jug X               |
