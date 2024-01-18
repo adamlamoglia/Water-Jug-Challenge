@@ -1,4 +1,3 @@
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
