@@ -1,4 +1,5 @@
 import 'package:water_jug_challenge/imports.dart';
+import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
 import 'package:water_jug_challenge/modules/result/widgets/animated_gallon.dart';
 import 'package:water_jug_challenge/widgets/step/step_widget_bloc.dart';
@@ -34,8 +35,7 @@ class _StepWidgetState extends State<StepWidget> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      width: 400,
-      height: 600,
+      height: MediaQuery.of(context).size.height * 0.7,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
         color: const Color.fromARGB(255, 210, 252, 200),
@@ -43,52 +43,71 @@ class _StepWidgetState extends State<StepWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'STEP ${widget.index + 1}',
-            style: Theme.of(context).textTheme.bodyLarge,
+          SizedBox(
+            height: 30,
+            child: Text(
+              'STEP ${widget.index + 1}',
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
           const SizedBox(height: 15),
           Center(
-            child: Text(
-              widget.step.text!.toUpperCase(),
-              style: Theme.of(context).textTheme.bodyMedium,
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                widget.step.text!.toUpperCase(),
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           ),
+          if (widget.index == ResultModel.getBestSolution().length - 1) ...[
+            const SizedBox(height: 10),
+            Center(
+              child: Text(
+                "SOLVED!",
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
+            ),
+          ],
           //const SizedBox(height: 30),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Obx(
-                  () => AnimatedGallon(
-                    step: widget.step,
-                    heightFillFaucet: stepWidgetBloc.heightFillFaucetLeft.value,
-                    opacityFillGallon:
-                        stepWidgetBloc.opacityWaterGallonLeft.value,
-                    heightEmptyGallon: stepWidgetBloc.heightEmptyLeft.value,
-                    percentOfWater:
-                        stepWidgetBloc.percentOfWaterInGallonLeft.value,
-                    isX: true,
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: SizedBox(
+              height: 320,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Obx(
+                    () => AnimatedGallon(
+                      step: widget.step,
+                      heightFillFaucet:
+                          stepWidgetBloc.heightFillFaucetLeft.value,
+                      opacityFillGallon:
+                          stepWidgetBloc.opacityWaterGallonLeft.value,
+                      heightEmptyGallon: stepWidgetBloc.heightEmptyLeft.value,
+                      percentOfWater:
+                          stepWidgetBloc.percentOfWaterInGallonLeft.value,
+                      isX: true,
+                    ),
                   ),
-                ),
-                Obx(
-                  () => AnimatedGallon(
-                    step: widget.step,
-                    heightFillFaucet:
-                        stepWidgetBloc.heightFillFaucetRight.value,
-                    opacityFillGallon:
-                        stepWidgetBloc.opacityWaterGallonRight.value,
-                    heightEmptyGallon: stepWidgetBloc.heightEmptyRight.value,
-                    percentOfWater:
-                        stepWidgetBloc.percentOfWaterInGallonRight.value,
-                    isX: false,
+                  Obx(
+                    () => AnimatedGallon(
+                      step: widget.step,
+                      heightFillFaucet:
+                          stepWidgetBloc.heightFillFaucetRight.value,
+                      opacityFillGallon:
+                          stepWidgetBloc.opacityWaterGallonRight.value,
+                      heightEmptyGallon: stepWidgetBloc.heightEmptyRight.value,
+                      percentOfWater:
+                          stepWidgetBloc.percentOfWaterInGallonRight.value,
+                      isX: false,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 10),
           Center(
             child: ElevatedButton.icon(
               onPressed: () async {
@@ -113,7 +132,7 @@ class _StepWidgetState extends State<StepWidget> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

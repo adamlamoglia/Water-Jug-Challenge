@@ -27,7 +27,10 @@ class AppWidget extends StatelessWidget {
           child,
           defaultScale: true,
           breakpoints: const [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
+            ResponsiveBreakpoint.resize(
+              480,
+              name: MOBILE,
+            ),
           ],
           background: Container(
             color: const Color(0xFFF5F5F5),
@@ -54,6 +57,10 @@ class AppWidget extends StatelessWidget {
           labelSmall: GoogleFonts.lilitaOne(
             color: const Color.fromARGB(255, 168, 66, 66),
             fontSize: 14,
+          ),
+          displaySmall: GoogleFonts.lilitaOne(
+            color: const Color.fromARGB(255, 66, 168, 92),
+            fontSize: 20,
           ),
         ),
         dividerColor: const Color(0xFFDBC1E4),

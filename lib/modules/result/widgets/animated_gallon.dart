@@ -27,18 +27,18 @@ class AnimatedGallon extends StatelessWidget {
       children: [
         SizedBox(
           width: 100,
-          height: 350,
+          height: 280,
           child: Stack(
             children: [
               Positioned(
-                top: 90,
+                top: 30,
                 left: 40,
                 child: AnimatedWaterDrop(
                   targetHeight: heightFillFaucet,
                 ),
               ),
               Positioned(
-                top: 50,
+                top: 10,
                 left: 27,
                 child: Image.asset(
                   'assets/faucet.png',
@@ -46,7 +46,7 @@ class AnimatedGallon extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 138,
+                top: 98,
                 left: 19,
                 child: AnimatedWaterFill(
                   step: step,
@@ -56,7 +56,7 @@ class AnimatedGallon extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 143,
+                top: 103,
                 left: 19,
                 child: Image.asset(
                   'assets/gallon2.png',
@@ -64,14 +64,14 @@ class AnimatedGallon extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 290,
+                top: 250,
                 left: 40,
                 child: AnimatedWaterDrop(
                   targetHeight: heightEmptyGallon,
                 ),
               ),
               Positioned(
-                top: 250,
+                top: 210,
                 left: 28,
                 child: Image.asset(
                   'assets/faucet.png',
