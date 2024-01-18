@@ -7,9 +7,6 @@ Welcome to the Water Jug Challenge App! This application is designed to solve th
 - [Algorithmic Approach](#algorithmic-approach)
 - [Test Cases for Validation](#test-cases-for-validation)
 - [Instructions](#instructions)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Algorithmic Approach
 
@@ -120,12 +117,13 @@ To run the program, follow these steps:
 
 ```bash
 git clone https://github.com/adamlamoglia/Water-Jug-Challenge.git
+```
 
 2. Navigate to the project directory:
 
 ```bash
 cd Water-Jug-Challenge
-
+```
 3. Run the program:
 
 ```bash
