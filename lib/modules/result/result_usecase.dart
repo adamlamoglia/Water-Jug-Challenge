@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:water_jug_challenge/app/app_routes.dart';
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
@@ -13,12 +14,16 @@ class ResultUseCase extends DisposableInterface {
     int targetAmount = resultBloc.jugZ.value;
 
     if (_canMeasureWater(jugX, jugY, targetAmount)) {
+      resultBloc.noSolution.value = '';
       minSteps(jugX, jugY, targetAmount);
+      Get.offAllNamed(AppRoutes.result);
+    } else {
+      resultBloc.noSolution.value = 'No solution';
     }
   }
 
   bool _canMeasureWater(int x, int y, int z) {
-    if (x + y < z) {
+    if (x + y <= z) {
       return false;
     }
     if (x == z || y == z || x + y == z) {
@@ -44,7 +49,7 @@ class ResultUseCase extends DisposableInterface {
         stepAction = isXtoY ? StepAction.fillX : StepAction.fillY;
         break;
       case StepActionBasic.empty:
-        stepAction = isXtoY ? StepAction.emptyX : StepAction.emptyY;
+        stepAction = isXtoY ? StepAction.emptyY : StepAction.emptyX;
         break;
       case StepActionBasic.transfer:
         stepAction = isXtoY ? StepAction.transferXtoY : StepAction.transferYtoX;

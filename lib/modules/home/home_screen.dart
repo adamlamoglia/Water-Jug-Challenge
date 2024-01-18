@@ -65,6 +65,13 @@ class HomeScreen extends StatelessWidget {
                 ),
               );
             }),
+            const SizedBox(height: 20),
+            Obx(() {
+              return Text(
+                resultBloc.noSolution.value,
+                style: Theme.of(context).textTheme.labelSmall,
+              );
+            }),
           ],
         ),
       ),

@@ -6,6 +6,7 @@ class ResultBloc extends DisposableInterface {
   Rx<int> jugX = 0.obs;
   Rx<int> jugY = 0.obs;
   Rx<int> jugZ = 0.obs;
+  Rx<String> noSolution = ''.obs;
 
   @override
   void onClose() {
@@ -13,5 +14,6 @@ class ResultBloc extends DisposableInterface {
     jugX.close();
     jugY.close();
     jugZ.close();
+    noSolution.close();
   }
 }

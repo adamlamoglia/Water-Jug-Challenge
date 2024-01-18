@@ -16,6 +16,10 @@ class ResultModel {
   static const String transferFromBucketYtoBucketX =
       'Transfer from bucket Y to bucket X';
 
+      static void addNoSolutionStep() {
+        
+      }
+
   static void addStepStartingFromX(StepModel step) {
     stepsStartingFromX!.add(step);
   }

@@ -1,17 +1,24 @@
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
 import 'package:water_jug_challenge/modules/result/widgets/animated_water_drop.dart';
+import 'package:water_jug_challenge/modules/result/widgets/animated_water_fill.dart';
 
 class AnimatedGallon extends StatelessWidget {
   const AnimatedGallon({
     Key? key,
     required this.step,
-    required this.heightFill,
+    required this.heightFillFaucet,
+    required this.opacityFillGallon,
+    required this.heightEmptyGallon,
+    required this.percentOfWater,
     required this.isX,
   }) : super(key: key);
 
   final StepModel step;
-  final double heightFill;
+  final double heightFillFaucet;
+  final double opacityFillGallon;
+  final double heightEmptyGallon;
+  final double percentOfWater;
   final bool isX;
 
   @override
@@ -26,7 +33,9 @@ class AnimatedGallon extends StatelessWidget {
               Positioned(
                 top: 90,
                 left: 40,
-                child: AnimatedWaterDrop(targetHeight: heightFill),
+                child: AnimatedWaterDrop(
+                  targetHeight: heightFillFaucet,
+                ),
               ),
               Positioned(
                 top: 50,
@@ -37,11 +46,28 @@ class AnimatedGallon extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 150,
-                left: 20,
+                top: 138,
+                left: 19,
+                child: AnimatedWaterFill(
+                  step: step,
+                  isX: isX,
+                  opacity: opacityFillGallon,
+                  percentOfWater: percentOfWater,
+                ),
+              ),
+              Positioned(
+                top: 143,
+                left: 19,
                 child: Image.asset(
                   'assets/gallon2.png',
-                  height: 130,
+                  height: 140,
+                ),
+              ),
+              Positioned(
+                top: 290,
+                left: 40,
+                child: AnimatedWaterDrop(
+                  targetHeight: heightEmptyGallon,
                 ),
               ),
               Positioned(
@@ -55,7 +81,6 @@ class AnimatedGallon extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 10),
         Text(
           isX ? 'X: ${step.actualX} L' : 'Y: ${step.actualY} L',
           style: Theme.of(context).textTheme.bodyMedium,

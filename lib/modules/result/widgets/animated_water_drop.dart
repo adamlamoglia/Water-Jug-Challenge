@@ -14,7 +14,7 @@ class _AnimatedWaterDropState extends State<AnimatedWaterDrop> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: widget.targetHeight == 0 ? 0 : 300),
       width: 7.0,
       height: widget.targetHeight,
       decoration: BoxDecoration(

@@ -51,6 +51,10 @@ class AppWidget extends StatelessWidget {
             color: const Color.fromARGB(255, 63, 62, 62),
             fontSize: 18,
           ),
+          labelSmall: GoogleFonts.lilitaOne(
+            color: const Color.fromARGB(255, 168, 66, 66),
+            fontSize: 14,
+          ),
         ),
         dividerColor: const Color(0xFFDBC1E4),
       ),
