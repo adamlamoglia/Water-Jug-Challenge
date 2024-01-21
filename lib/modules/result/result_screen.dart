@@ -1,3 +1,4 @@
+import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:water_jug_challenge/imports.dart';
 import 'package:water_jug_challenge/modules/result/models/result_model.dart';
 import 'package:water_jug_challenge/modules/result/models/step_model.dart';
@@ -28,58 +29,62 @@ class ResultScreen extends StatelessWidget {
           SizedBox(width: 10),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 30,
-            child: Text(
-              "X capacity: ${resultBloc.jugX.value} | Y capacity: ${resultBloc.jugY.value} | Objective: ${resultBloc.jugZ.value}",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            height: 503,
-            child: PageView.builder(
-              controller: controller,
-              itemCount: bestSolution.length,
-              onPageChanged: (value) {
-                StepWidgetModel.initStep(bestSolution[value]);
-              },
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (_, index) {
-                return StepWidget(step: bestSolution[index], index: index);
-              },
-            ),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  controller.previousPage(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeInOut);
-                },
-                icon: const Icon(Icons.arrow_back, size: 18),
-                label: const Text(''),
+      body: ResponsiveWrapper(
+        defaultScale: false,
+        defaultScaleFactor: 0.95,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 30,
+              child: Text(
+                "X capacity: ${resultBloc.jugX.value} | Y capacity: ${resultBloc.jugY.value} | Objective: ${resultBloc.jugZ.value}",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              const SizedBox(width: 10),
-              ElevatedButton.icon(
-                onPressed: () {
-                  controller.nextPage(
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeInOut);
+            ),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 503,
+              child: PageView.builder(
+                controller: controller,
+                itemCount: bestSolution.length,
+                onPageChanged: (value) {
+                  StepWidgetModel.initStep(bestSolution[value]);
                 },
-                icon: const Icon(Icons.arrow_forward, size: 18),
-                label: const Text(''),
+                physics: const BouncingScrollPhysics(),
+                itemBuilder: (_, index) {
+                  return StepWidget(step: bestSolution[index], index: index);
+                },
               ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: () {
+                    controller.previousPage(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut);
+                  },
+                  icon: const Icon(Icons.arrow_back, size: 18),
+                  label: const Text(''),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    controller.nextPage(
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut);
+                  },
+                  icon: const Icon(Icons.arrow_forward, size: 18),
+                  label: const Text(''),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
